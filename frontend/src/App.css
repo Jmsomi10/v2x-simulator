@@ -1,0 +1,365 @@
+.dashboard-container {
+  text-align: center;
+  font-family: sans-serif;
+  background-color: #1e1e1e;
+  color: white;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.intersection-map {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  background-color: #557548;
+  border-radius: 8px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border: 4px solid #444;
+}
+
+.spat-panel {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 205px;
+  padding: 10px 12px;
+  border: 1px solid rgba(111, 203, 255, 0.55);
+  border-radius: 7px;
+  background: rgba(7, 20, 31, 0.92);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.36);
+  color: #e9f7ff;
+  text-align: left;
+  font-size: 12px;
+}
+
+.spat-panel strong { color: #75d7ff; font-size: 14px; }
+.spat-eyebrow { color: #9caeb9; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.spat-movements { color: #cfe5ef; line-height: 1.35; }
+
+.sidewalk {
+  position: absolute;
+  z-index: 0;
+  background: #b8b2a5;
+  box-shadow: inset 0 2px rgba(255, 255, 255, 0.2), inset 0 -2px rgba(0, 0, 0, 0.12);
+}
+
+.sidewalk--north, .sidewalk--south { left: 196px; width: 208px; height: 20px; }
+.sidewalk--north { top: 196px; }
+.sidewalk--south { bottom: 196px; }
+.sidewalk--west, .sidewalk--east { top: 196px; width: 20px; height: 208px; }
+.sidewalk--west { left: 196px; }
+.sidewalk--east { right: 196px; }
+
+.building {
+  position: absolute;
+  z-index: 0;
+  width: 112px;
+  height: 100px;
+  border: 4px solid #8d8577;
+  border-radius: 9px;
+  background: #d4c8b2;
+  box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.18);
+}
+
+.building--northwest { top: 34px; left: 48px; }
+.building--northeast { top: 34px; right: 48px; }
+.building--southwest { bottom: 34px; left: 48px; }
+.building--southeast { right: 48px; bottom: 34px; }
+
+.tree {
+  position: absolute;
+  right: -24px;
+  bottom: -18px;
+  width: 37px;
+  height: 37px;
+  border: 4px solid #35643a;
+  border-radius: 50%;
+  background: #5d9e54;
+  box-shadow: -10px 9px 0 -3px #4e8a49, 8px -9px 0 -3px #6bab5e;
+}
+
+.road-vertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 160px;
+  transform: translateX(-50%);
+  background-color: #333;
+  border-left: 4px solid #ccc;
+  border-right: 4px solid #ccc;
+  z-index: 1;
+}
+
+.road-vertical::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px dashed #fff;
+}
+
+.road-horizontal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 160px;
+  transform: translateY(-50%);
+  background-color: #333;
+  border-top: 4px solid #ccc;
+  border-bottom: 4px solid #ccc;
+  z-index: 1;
+}
+
+.road-horizontal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 4px dashed #fff;
+}
+
+.center-intersection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  transform: translate(-50%, -50%);
+  background-color: #333;
+  z-index: 1;
+}
+
+.crosswalk, .stop-bar, .road-arrow, .traffic-light { position: absolute; z-index: 5; }
+
+.crosswalk--north, .crosswalk--south {
+  left: 218px;
+  width: 164px;
+  height: 14px;
+  background: repeating-linear-gradient(90deg, #f5f3eb 0 11px, transparent 11px 19px);
+}
+.crosswalk--north { top: 200px; }
+.crosswalk--south { bottom: 200px; }
+.crosswalk--west, .crosswalk--east {
+  top: 218px;
+  width: 14px;
+  height: 164px;
+  background: repeating-linear-gradient(0deg, #f5f3eb 0 11px, transparent 11px 19px);
+}
+.crosswalk--west { left: 200px; }
+.crosswalk--east { right: 200px; }
+
+.stop-bar { background: #f4f1e7; box-shadow: 0 0 2px rgba(0, 0, 0, 0.4); }
+.stop-bar--north, .stop-bar--south { left: 218px; width: 164px; height: 4px; }
+.stop-bar--north { top: 218px; }
+.stop-bar--south { bottom: 218px; }
+.stop-bar--west, .stop-bar--east { top: 218px; width: 4px; height: 164px; }
+.stop-bar--west { left: 218px; }
+.stop-bar--east { right: 218px; }
+
+.road-arrow { color: rgba(255, 255, 255, 0.8); font-size: 28px; font-weight: bold; }
+.road-arrow--eastbound { top: 330px; left: 154px; }
+.road-arrow--westbound { top: 250px; right: 154px; }
+.road-arrow--northbound { bottom: 154px; left: 328px; }
+.road-arrow--southbound { top: 154px; left: 250px; }
+
+.traffic-light {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 4px;
+  border: 2px solid #1b1b1b;
+  border-radius: 4px;
+  background: #111;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+/* Clear the northeast corner for the eastbound bus's right turn. */
+.traffic-light--north { top: 135px; left: 410px; }
+.traffic-light--south { right: 391px; bottom: 181px; }
+.traffic-light--west { top: 391px; left: 181px; }
+/* Place the east-side signal on the northeast corner, outside the turn lane. */
+.traffic-light--east { top: 126px; right: 82px; }
+.traffic-light--horizontal { flex-direction: row; }
+.light { width: 8px; height: 8px; border-radius: 50%; background: #3a2525; }
+.light--yellow { background: #42391f; }
+.light--green { background: #203b2a; }
+.light--red.is-on { background: #ff4545; box-shadow: 0 0 7px #ff4545; }
+.light--green.is-on { background: #4bd46b; box-shadow: 0 0 7px #4bd46b; }
+
+/* The outer marker moves on the map. */
+.vehicle-marker {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  transition: left 0.1s linear, top 0.1s linear;
+  z-index: 10;
+}
+
+/* The nested vehicle rotates based on its heading. */
+.vehicle {
+  --vehicle-color: #2f80ed;
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  transition: transform 0.15s ease-out;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.55));
+}
+
+.vehicle-body {
+  position: absolute;
+  inset: 2px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 9px 9px 6px 6px;
+  background: var(--vehicle-color);
+  overflow: hidden;
+}
+
+.vehicle-body::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 13px;
+  height: 4px;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  background: #f7df94;
+  box-shadow: 0 35px 0 #ed6a5a;
+}
+
+.vehicle-brake-light, .vehicle-turn-light {
+  position: absolute;
+  z-index: 2;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+.vehicle-brake-light { bottom: 4px; background: #7b1e23; }
+.vehicle-brake-light--left { left: 3px; }
+.vehicle-brake-light--right { right: 3px; }
+.vehicle--braking .vehicle-brake-light { background: #ff303b; box-shadow: 0 0 6px #ff303b; }
+.vehicle-turn-light { top: 4px; background: #c58217; opacity: 0.25; }
+.vehicle-turn-light--left { left: 3px; }
+.vehicle-turn-light--right { right: 3px; }
+.vehicle--signal-left .vehicle-turn-light--left,
+.vehicle--signal-right .vehicle-turn-light--right {
+  opacity: 1;
+  background: #ffbf2f;
+  box-shadow: 0 0 6px #ffbf2f;
+  animation: turn-signal 0.7s steps(2, end) infinite;
+}
+
+.vehicle-windshield,
+.vehicle-roof {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(19, 37, 55, 0.82);
+}
+
+.vehicle-windshield {
+  top: 11px;
+  width: 16px;
+  height: 8px;
+  border-radius: 5px 5px 2px 2px;
+}
+
+.vehicle-roof {
+  top: 20px;
+  width: 18px;
+  height: 13px;
+  border-radius: 3px;
+}
+
+.vehicle-wheel {
+  position: absolute;
+  width: 4px;
+  height: 10px;
+  border-radius: 3px;
+  background: #111820;
+}
+
+.vehicle-wheel--front-left { top: 8px; left: 0; }
+.vehicle-wheel--front-right { top: 8px; right: 0; }
+.vehicle-wheel--rear-left { bottom: 8px; left: 0; }
+.vehicle-wheel--rear-right { right: 0; bottom: 8px; }
+
+.vehicle--suv {
+  --vehicle-color: #8557d8;
+}
+
+.vehicle--suv .vehicle-body {
+  inset: 0 2px;
+  border-radius: 8px;
+}
+
+.vehicle--bus {
+  --vehicle-color: #ef9b2d;
+}
+
+.vehicle--bus .vehicle-body {
+  inset: 0 1px;
+  border-radius: 5px;
+}
+
+.vehicle--bus .vehicle-windshield {
+  width: 20px;
+}
+
+.vehicle--bus .vehicle-roof {
+  width: 21px;
+  height: 23px;
+}
+
+.vehicle--emergency {
+  --vehicle-color: #e5484d;
+}
+
+.vehicle-lightbar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 16px;
+  height: 4px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3f9cff 50%, #ff4b5e 50%);
+  box-shadow: 0 0 7px 2px rgba(92, 162, 255, 0.75);
+  animation: emergency-flash 0.7s steps(2, end) infinite;
+}
+
+@keyframes emergency-flash {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes turn-signal {
+  50% { opacity: 0.18; }
+}
+
+.car-label {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+}
